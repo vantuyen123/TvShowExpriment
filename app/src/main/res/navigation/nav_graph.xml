@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mostPopularFragment">
+
+    <fragment
+        android:id="@+id/mostPopularFragment"
+        android:name="com.example.material.tvshowexperiment.ui.mostpopular.MostPopularFragment"
+        android:label="MostPopularFragment"
+        tools:layout="@layout/most_popular_fragment">
+        <action
+            android:id="@+id/action_mostPopularFragment_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvShowDetailFragment"
+        android:name="com.example.material.tvshowexperiment.ui.detail.TvShowDetailFragment"
+        android:label="TvShowDetailFragment">
+        <argument
+            android:name="tvshow"
+            app:argType="com.example.material.tvshowexperiment.data.TvShow"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.material.tvshowexperiment.ui.search.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment">
+        <action
+            android:id="@+id/action_searchFragment_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/watchListFragment"
+        android:name="com.example.material.tvshowexperiment.ui.watchlist.WatchListFragment"
+        android:label="watch_list_fragment"
+        tools:layout="@layout/watch_list_fragment">
+        <action
+            android:id="@+id/action_watchListFragment_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+</navigation>
