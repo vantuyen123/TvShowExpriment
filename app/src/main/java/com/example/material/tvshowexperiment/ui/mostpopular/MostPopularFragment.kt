@@ -1,6 +1,8 @@
 package com.example.material.tvshowexperiment.ui.mostpopular
 
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,38 +19,49 @@ import com.example.material.tvshowexperiment.Injection
 import com.example.material.tvshowexperiment.R
 import com.example.material.tvshowexperiment.databinding.MostPopularFragmentBinding
 import com.example.material.tvshowexperiment.ui.TvShowLoadStateAdapter
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MostPopularFragment : Fragment() {
-
+    companion object{
+        private const val KEY_RECYCLER_STATE = "recycler_state"
+    }
+    private lateinit var savedRecyclerViewLayoutSate: Parcelable
 
     private lateinit var viewModel: MostPopularViewModel
+
     private lateinit var binding: MostPopularFragmentBinding
     private val mostPopularAdapter = MostPopularAdapter(MostPopularAdapter.OnClickListener {
         viewModel.displayTvShowDetail(it)
     })
+    private var job: Job? = null
+
+    private fun init() {
+        job?.cancel()
+        job = lifecycleScope.launch {
+            viewModel.getMostPopularTvShow().collectLatest {
+                mostPopularAdapter.submitData(it)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding =
-            DataBindingUtil.inflate(
-                inflater,
-                R.layout.most_popular_fragment,
-                container,
-                false
-            )
-
+            DataBindingUtil.inflate(inflater, R.layout.most_popular_fragment, container, false)
 
         viewModel = ViewModelProvider(
             this,
             Injection.providerViewModelFactory()
         ).get(MostPopularViewModel::class.java)
+
         binding.retryButton.setOnClickListener { mostPopularAdapter.retry() }
 
         binding.lifecycleOwner = this
+        init()
         initRecyclerView()
 
         viewModel.navigateToTvShowDetail.observe(viewLifecycleOwner, {
@@ -61,22 +74,24 @@ class MostPopularFragment : Fragment() {
         })
 
 
-        return binding.root
 
+        return binding.root
     }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("MostPopularFragment","onSaveInstanceState Called")
+        outState.putParcelable(KEY_RECYCLER_STATE,binding.tvShowRecyclerView.layoutManager?.onSaveInstanceState())
+    }
+
+
 
     private fun initRecyclerView() {
         binding.tvShowRecyclerView.adapter = mostPopularAdapter.withLoadStateHeaderAndFooter(
             header = TvShowLoadStateAdapter { mostPopularAdapter.retry() },
             footer = TvShowLoadStateAdapter { mostPopularAdapter.retry() }
         )
-
-        lifecycleScope.launch {
-            viewModel.newResult.collectLatest {
-                mostPopularAdapter.submitData(it)
-            }
-        }
-
         binding.tvShowRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -94,7 +109,7 @@ class MostPopularFragment : Fragment() {
             errorState?.let {
                 Toast.makeText(
                     context,
-                    "\uD83D\uDE28 Woops ${it.error}", Toast.LENGTH_SHORT
+                    "\uD83D\uDE28 Woops ", Toast.LENGTH_SHORT
                 ).show()
             }
         }

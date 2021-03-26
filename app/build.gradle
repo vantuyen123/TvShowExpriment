@@ -75,6 +75,7 @@ dependencies {
 
     //Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
+    kapt "com.github.bumptech.glide:compiler:$version_glide"
 
 
     //Rounded Image View

@@ -6,6 +6,11 @@
     <string name="retry">Retry</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
+    <string name="u2022">•</string>
     <string name="watch_list">Watch List</string>
     <string name="watch_last">Watch Last</string>
+    <string name="read_more">Read More</string>
+    <string name="website">Website</string>
+    <string name="episodes">Episodes</string>
+    <string name="search_tv_show">Search Tv Show</string>
 </resources>

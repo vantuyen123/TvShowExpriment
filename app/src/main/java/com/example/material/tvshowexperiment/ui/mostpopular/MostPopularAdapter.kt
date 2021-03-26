@@ -36,9 +36,12 @@ class MostPopularAdapter(private val onClickListener: OnClickListener) :
             }
         }
     }
+
     class OnClickListener(val clickListener: (tvShow: TvShow) -> Unit) {
         fun onClick(tvShow: TvShow) = clickListener(tvShow)
     }
+
+
 }
 
 

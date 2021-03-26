@@ -21,7 +21,8 @@
     <fragment
         android:id="@+id/tvShowDetailFragment"
         android:name="com.example.material.tvshowexperiment.ui.detail.TvShowDetailFragment"
-        android:label="TvShowDetailFragment">
+        android:label="TvShowDetailFragment"
+        tools:layout="@layout/tv_show_detail_fragment">
         <argument
             android:name="tvshow"
             app:argType="com.example.material.tvshowexperiment.data.TvShow"
@@ -29,6 +30,9 @@
             app:exitAnim="@anim/slide_in_left"
             app:popEnterAnim="@anim/slide_out_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_tvShowDetailFragment_to_mostPopularFragment"
+            app:destination="@id/mostPopularFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -42,6 +46,9 @@
             app:exitAnim="@anim/slide_in_left"
             app:popEnterAnim="@anim/slide_out_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_searchFragment_to_mostPopularFragment"
+            app:destination="@id/mostPopularFragment" />
     </fragment>
     <fragment
         android:id="@+id/watchListFragment"

@@ -37,7 +37,7 @@ class SliderAdapter() :
         companion object {
             fun form(parent: ViewGroup): SliderViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemImageSliderBinding.inflate(layoutInflater)
+                val binding = ItemImageSliderBinding.inflate(layoutInflater,parent,false)
                 return SliderViewHolder(binding)
             }
         }

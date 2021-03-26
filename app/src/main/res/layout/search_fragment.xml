@@ -1,15 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.search.SearchFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Search Fragment"
-        android:textSize="@dimen/_24ssp" />
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.material.tvshowexperiment.ui.search.SearchViewModel" />
+    </data>
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="@color/purple_500"
+        tools:context=".ui.search.SearchFragment">
+
+        <LinearLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/purple_700"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageBackSearch"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_back"
+                android:onClick="@{()->viewModel.navigateToHome()}"
+                app:tint="@color/white" />
+
+            <EditText
+                android:id="@+id/inputSearch"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:privateImeOptions=""
+                android:fontFamily="@font/ubuntu"
+                android:hint="@string/search_tv_show"
+                android:imeOptions="actionSearch"
+                android:importantForAutofill="no"
+                android:includeFontPadding="false"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/colorTextSecondary"
+                android:textSize="@dimen/_13ssp" />
+
+            <ImageView
+                android:id="@+id/imageSearch"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/_2sdp"
+                android:src="@drawable/ic__search_"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tvShowRecyclerViewSearch"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutHeader"
+            tools:listitem="@layout/item_most_popular" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

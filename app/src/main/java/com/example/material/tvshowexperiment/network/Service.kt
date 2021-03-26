@@ -1,16 +1,13 @@
 package com.example.material.tvshowexperiment.network
 
-import com.example.material.tvshowexperiment.data.TvShowDetail
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Query
-import kotlin.math.log
 
 private const val BASE_URL = "https://www.episodate.com/api/"
 
@@ -24,6 +21,9 @@ interface TvShowApiService {
 
     @GET("show-details")
     suspend fun getTvShowDetail(@Query("q") q: Int): TvShowDetailResponse
+
+    @GET("search")
+    suspend fun getTvShowSearch(@Query("q") q: String, @Query("page") page: Int): SearchResponse
 
     companion object {
         fun create(): TvShowApiService {

@@ -13,7 +13,7 @@ class MostPopularRepository(private val service: TvShowApiService) {
     fun getPopularMovie(): Flow<PagingData<TvShow>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 20,
+                pageSize = NETWORK_SIZE,
                 enablePlaceholders = false
             ), pagingSourceFactory = { TvShowPagingSource(service) }
         ).flow

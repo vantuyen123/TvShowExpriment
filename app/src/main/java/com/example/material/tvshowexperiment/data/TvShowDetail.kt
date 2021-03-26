@@ -6,6 +6,17 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class TvShowDetail(
+    @Json(name = "url")
+    val url: String,
+
+    @Json(name = "name")
+    val name: String,
+
+    @Json(name = "runtime")
+    val runtime: Int,
+
+    @Json(name = "image_path")
+    val imagePath: String,
 
     @Json(name = "description")
     val description: String,
@@ -18,21 +29,10 @@ data class TvShowDetail(
 
     @Json(name = "id")
     val id: Int,
-    @Json(name = "image_path")
-    val imagePath: String,
-
-    @Json(name = "permalink")
-    val permalink: String,
 
     @Json(name = "pictures")
     val pictures: List<String>,
 
     @Json(name = "rating")
     val rating: String,
-
-    @Json(name = "runtime")
-    val runtime: Int,
-
-    @Json(name = "url")
-    val url: String,
 )
